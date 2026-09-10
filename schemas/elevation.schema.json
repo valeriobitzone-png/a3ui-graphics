@@ -1,0 +1,71 @@
+{
+  "$id": "https://a3ui.local/graphics/schemas/elevation.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "status", "phase", "doc", "zIndex", "ambientShadow", "keyShadow", "deferred"],
+  "properties": {
+    "version": { "type": "string", "const": "0.1" },
+    "status": { "type": "string", "enum": ["fase-1", "deferred"] },
+    "phase": { "type": "string", "enum": ["fase-1", "remainder-l2", "S-D2", "S-D3", "S-D4", "S-D5"] },
+    "doc": { "type": "string", "const": "docs/00-foundations.md" },
+    "zIndex": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["background", "content", "glass", "overlay", "chrome"],
+      "properties": {
+        "background": { "type": "integer" },
+        "content": { "type": "integer" },
+        "glass": { "type": "integer" },
+        "overlay": { "type": "integer" },
+        "chrome": { "type": "integer" }
+      }
+    },
+    "ambientShadow": { "$ref": "#/$defs/shadow" },
+    "keyShadow": { "$ref": "#/$defs/keyShadow" },
+    "deferred": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["adaptiveAmbientLuminance"],
+      "properties": {
+        "adaptiveAmbientLuminance": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["status", "phase"],
+          "properties": {
+            "status": { "type": "string", "const": "deferred" },
+            "phase": { "type": "string", "const": "S-D5" }
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "shadow": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["color", "opacity", "offsetXPx", "offsetYPx", "blurPx", "spreadPx"],
+      "properties": {
+        "color": { "type": "string" },
+        "opacity": { "type": "number", "minimum": 0, "maximum": 1 },
+        "offsetXPx": { "type": "number" },
+        "offsetYPx": { "type": "number" },
+        "blurPx": { "type": "number", "minimum": 0 },
+        "spreadPx": { "type": "number" }
+      }
+    },
+    "keyShadow": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["color", "opacity", "offsetXPx", "offsetYPx", "blurPx", "spreadPx", "azimuthDeg"],
+      "properties": {
+        "color": { "type": "string" },
+        "opacity": { "type": "number", "minimum": 0, "maximum": 1 },
+        "offsetXPx": { "type": "number" },
+        "offsetYPx": { "type": "number" },
+        "blurPx": { "type": "number", "minimum": 0 },
+        "spreadPx": { "type": "number" },
+        "azimuthDeg": { "type": "number", "minimum": 0, "maximum": 360 }
+      }
+    }
+  }
+}

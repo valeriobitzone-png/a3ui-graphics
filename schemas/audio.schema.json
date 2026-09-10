@@ -1,0 +1,44 @@
+{
+  "$id": "https://a3ui.local/graphics/schemas/audio.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "status", "phase", "doc", "invariant", "synthesis", "files", "voiceCeiling", "tones"],
+  "properties": {
+    "version": { "type": "string", "const": "0.1" },
+    "status": { "type": "string", "const": "deferred" },
+    "phase": { "type": "string", "const": "S-D5" },
+    "doc": { "type": "string", "const": "docs/06-audio.md" },
+    "invariant": { "type": "string", "const": "oneSoundOneVisibleCause" },
+    "synthesis": { "type": "string", "const": "realtime" },
+    "files": { "type": "boolean", "const": false },
+    "voiceCeiling": { "type": "number", "minimum": 0, "maximum": 1 },
+    "tones": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["morph"],
+      "properties": {
+        "morph": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["frequencyHz", "semitones", "durationMs", "envelope"],
+          "properties": {
+            "frequencyHz": { "type": "number", "minimum": 0 },
+            "semitones": { "type": "number" },
+            "durationMs": { "type": "integer", "minimum": 0 },
+            "envelope": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["attackMs", "decayMs", "sustain", "releaseMs"],
+              "properties": {
+                "attackMs": { "type": "integer", "minimum": 0 },
+                "decayMs": { "type": "integer", "minimum": 0 },
+                "sustain": { "type": "number", "minimum": 0, "maximum": 1 },
+                "releaseMs": { "type": "integer", "minimum": 0 }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

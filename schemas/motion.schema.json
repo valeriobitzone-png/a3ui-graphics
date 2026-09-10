@@ -1,0 +1,77 @@
+{
+  "$id": "https://a3ui.local/graphics/schemas/motion.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "status", "phase", "doc", "reducedMotion", "springs", "easings", "epistemicVerbs"],
+  "properties": {
+    "version": { "type": "string", "const": "0.1" },
+    "status": { "type": "string", "const": "deferred" },
+    "phase": { "type": "string", "const": "S-D2" },
+    "doc": { "type": "string", "const": "docs/02-motion.md" },
+    "reducedMotion": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["zeroAllDurations", "keepChroma"],
+      "properties": {
+        "zeroAllDurations": { "type": "boolean" },
+        "keepChroma": { "type": "boolean" }
+      }
+    },
+    "springs": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["compact", "comfortable", "spacious"],
+      "properties": {
+        "compact": { "$ref": "#/$defs/spring" },
+        "comfortable": { "$ref": "#/$defs/spring" },
+        "spacious": { "$ref": "#/$defs/spring" }
+      }
+    },
+    "easings": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["standard", "emphasized"],
+      "properties": {
+        "standard": { "type": "string" },
+        "emphasized": { "type": "string" }
+      }
+    },
+    "epistemicVerbs": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "heldPulseMs",
+        "unknownShimmerMs",
+        "contradictedCrackMs",
+        "staleFadeMs",
+        "compensatedFadeMs",
+        "crackMs",
+        "crackPeak",
+        "holdScale"
+      ],
+      "properties": {
+        "heldPulseMs": { "type": "integer" },
+        "unknownShimmerMs": { "type": "integer" },
+        "contradictedCrackMs": { "type": "integer" },
+        "staleFadeMs": { "type": "integer" },
+        "compensatedFadeMs": { "type": "integer" },
+        "crackMs": { "type": "integer" },
+        "crackPeak": { "type": "number" },
+        "holdScale": { "type": "number" }
+      }
+    }
+  },
+  "$defs": {
+    "spring": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["mass", "stiffness", "damping", "durationHintMs"],
+      "properties": {
+        "mass": { "type": "number", "minimum": 0 },
+        "stiffness": { "type": "number", "minimum": 0 },
+        "damping": { "type": "number", "minimum": 0 },
+        "durationHintMs": { "type": "integer", "minimum": 0 }
+      }
+    }
+  }
+}

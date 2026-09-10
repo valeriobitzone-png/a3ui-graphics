@@ -1,0 +1,48 @@
+{
+  "$id": "https://a3ui.local/graphics/schemas/typography.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "status", "phase", "doc", "stack", "fase1Fallback", "variable", "opticalSizing"],
+  "properties": {
+    "version": { "type": "string", "const": "0.1" },
+    "status": { "type": "string", "const": "deferred" },
+    "phase": { "type": "string", "const": "remainder-l2" },
+    "doc": { "type": "string", "const": "docs/01-micro-geometry.md" },
+    "stack": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string" }
+    },
+    "fase1Fallback": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sizeSp", "weight", "colorToken"],
+      "properties": {
+        "sizeSp": { "type": "integer", "minimum": 1 },
+        "weight": { "type": "integer", "minimum": 1 },
+        "colorToken": { "type": "string", "const": "ink" }
+      }
+    },
+    "variable": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "axes"],
+      "properties": {
+        "status": { "type": "string", "const": "deferred" },
+        "axes": {
+          "type": "array",
+          "minItems": 2,
+          "items": { "type": "string", "enum": ["wght", "opsz"] }
+        }
+      }
+    },
+    "opticalSizing": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status"],
+      "properties": {
+        "status": { "type": "string", "const": "deferred" }
+      }
+    }
+  }
+}

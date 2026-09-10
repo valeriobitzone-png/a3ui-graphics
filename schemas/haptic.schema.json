@@ -1,0 +1,78 @@
+{
+  "$id": "https://a3ui.local/graphics/schemas/haptic.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "status", "phase", "doc", "gapMs", "intensities", "patterns", "deferred"],
+  "properties": {
+    "version": { "type": "string", "const": "0.1" },
+    "status": { "type": "string", "const": "deferred" },
+    "phase": { "type": "string", "const": "S-D5" },
+    "doc": { "type": "string", "const": "docs/07-haptic.md" },
+    "gapMs": { "type": "integer", "minimum": 0 },
+    "intensities": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["light", "medium"],
+      "properties": {
+        "light": { "$ref": "#/$defs/intensity" },
+        "medium": { "$ref": "#/$defs/intensity" }
+      }
+    },
+    "patterns": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["tap", "double-tap"],
+      "properties": {
+        "tap": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["intensity", "count"],
+          "properties": {
+            "intensity": { "type": "string", "enum": ["light", "medium"] },
+            "count": { "type": "integer", "minimum": 1 }
+          }
+        },
+        "double-tap": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["intensity", "count", "gapMs"],
+          "properties": {
+            "intensity": { "type": "string", "enum": ["light", "medium"] },
+            "count": { "type": "integer", "minimum": 1 },
+            "gapMs": { "type": "integer", "minimum": 0 }
+          }
+        }
+      }
+    },
+    "deferred": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["localized", "pressure"],
+      "properties": {
+        "localized": { "$ref": "#/$defs/deferredFlag" },
+        "pressure": { "$ref": "#/$defs/deferredFlag" }
+      }
+    }
+  },
+  "$defs": {
+    "intensity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["amplitude", "durationMs", "texture"],
+      "properties": {
+        "amplitude": { "type": "number", "minimum": 0, "maximum": 1 },
+        "durationMs": { "type": "integer", "minimum": 0 },
+        "texture": { "type": "string", "enum": ["tick", "tap"] }
+      }
+    },
+    "deferredFlag": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "phase"],
+      "properties": {
+        "status": { "type": "string", "const": "deferred" },
+        "phase": { "type": "string", "const": "S-D5" }
+      }
+    }
+  }
+}

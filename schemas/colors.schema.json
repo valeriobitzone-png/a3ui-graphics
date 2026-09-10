@@ -1,0 +1,103 @@
+{
+  "$id": "https://a3ui.local/graphics/schemas/colors.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "status", "phase", "doc", "palette", "contrast", "stages", "semantic", "deferred"],
+  "properties": {
+    "version": { "type": "string", "const": "0.1" },
+    "status": { "type": "string", "enum": ["fase-1", "deferred"] },
+    "phase": { "type": "string", "enum": ["fase-1", "remainder-l2", "S-D2", "S-D3", "S-D4", "S-D5"] },
+    "doc": { "type": "string", "const": "docs/00-foundations.md" },
+    "palette": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["ink", "paper", "amber"],
+      "properties": {
+        "ink": { "$ref": "#/$defs/swatch" },
+        "paper": { "$ref": "#/$defs/swatch" },
+        "amber": { "$ref": "#/$defs/swatch" }
+      }
+    },
+    "contrast": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["minRatio", "highContrastMinRatio"],
+      "properties": {
+        "minRatio": { "type": "number", "minimum": 1 },
+        "highContrastMinRatio": { "type": "number", "minimum": 1 }
+      }
+    },
+    "stages": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["ascolto", "lavoro", "pronto", "approva"],
+      "properties": {
+        "ascolto": { "$ref": "#/$defs/stage" },
+        "lavoro": { "$ref": "#/$defs/stage" },
+        "pronto": { "$ref": "#/$defs/stage" },
+        "approva": { "$ref": "#/$defs/stage" }
+      }
+    },
+    "semantic": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["accent", "success", "anticipation_highlight"],
+      "properties": {
+        "accent": { "$ref": "#/$defs/semanticRef" },
+        "success": { "$ref": "#/$defs/semanticRef" },
+        "anticipation_highlight": { "$ref": "#/$defs/semanticRef" }
+      }
+    },
+    "deferred": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["colorExtractionMonet", "adaptiveContrastRealtime"],
+      "properties": {
+        "colorExtractionMonet": { "$ref": "#/$defs/deferredFlag" },
+        "adaptiveContrastRealtime": { "$ref": "#/$defs/deferredFlag" }
+      }
+    }
+  },
+  "$defs": {
+    "swatch": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["hex", "luminance"],
+      "properties": {
+        "hex": { "type": "string" },
+        "luminance": { "type": "number", "minimum": 0, "maximum": 1 }
+      }
+    },
+    "stage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["saturation", "scaleRgb"],
+      "properties": {
+        "saturation": { "type": "number", "minimum": 0 },
+        "scaleRgb": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 3,
+          "items": { "type": "number" }
+        }
+      }
+    },
+    "semanticRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["palette"],
+      "properties": {
+        "palette": { "type": "string", "enum": ["ink", "paper", "amber"] }
+      }
+    },
+    "deferredFlag": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "phase"],
+      "properties": {
+        "status": { "type": "string", "const": "deferred" },
+        "phase": { "type": "string", "const": "S-D5" }
+      }
+    }
+  }
+}

@@ -1,0 +1,110 @@
+{
+  "$id": "https://a3ui.local/graphics/schemas/surfaces.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "status", "phase", "doc", "glass", "acrylic", "container", "deferred"],
+  "properties": {
+    "version": { "type": "string", "const": "0.1" },
+    "status": { "type": "string", "enum": ["fase-1", "deferred"] },
+    "phase": { "type": "string", "enum": ["fase-1", "remainder-l2", "S-D2", "S-D3", "S-D4", "S-D5"] },
+    "doc": { "type": "string", "const": "docs/00-foundations.md" },
+    "glass": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["blurRadiusPx", "fillColor", "fillOpacity", "vibrancySaturation", "innerHighlight", "outerHighlight"],
+      "properties": {
+        "blurRadiusPx": { "type": "number", "minimum": 0 },
+        "fillColor": { "type": "string" },
+        "fillOpacity": { "type": "number", "minimum": 0, "maximum": 1 },
+        "vibrancySaturation": { "type": "number", "minimum": 1 },
+        "innerHighlight": { "$ref": "#/$defs/highlight" },
+        "outerHighlight": { "$ref": "#/$defs/highlight" }
+      }
+    },
+    "acrylic": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["blurRadiusPx", "fillColor", "fillOpacity", "vibrancySaturation"],
+      "properties": {
+        "blurRadiusPx": { "type": "number", "minimum": 0 },
+        "fillColor": { "type": "string" },
+        "fillOpacity": { "type": "number", "minimum": 0, "maximum": 1 },
+        "vibrancySaturation": { "type": "number", "minimum": 1 }
+      }
+    },
+    "container": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["corner", "nestedRadius"],
+      "properties": {
+        "corner": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["kind", "superellipseN", "radiusPx"],
+          "properties": {
+            "kind": { "type": "string", "const": "squircle" },
+            "superellipseN": { "type": "number", "minimum": 2 },
+            "radiusPx": { "type": "number", "minimum": 0 }
+          }
+        },
+        "nestedRadius": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["minPx", "formula"],
+          "properties": {
+            "minPx": { "type": "number", "minimum": 0 },
+            "formula": { "type": "string", "const": "max(minPx, outerRadiusPx - paddingPx)" }
+          }
+        }
+      }
+    },
+    "deferred": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["refraction", "noiseTexture"],
+      "properties": {
+        "refraction": { "$ref": "#/$defs/deferredFlag" },
+        "noiseTexture": { "$ref": "#/$defs/deferredFlag" }
+      }
+    }
+  },
+  "$defs": {
+    "highlight": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["widthPx", "kind", "stops"],
+      "properties": {
+        "widthPx": { "type": "integer", "const": 1 },
+        "kind": { "type": "string", "enum": ["gradient-light", "gradient-dark"] },
+        "stops": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["position", "rgba"],
+            "properties": {
+              "position": { "type": "number", "minimum": 0, "maximum": 1 },
+              "rgba": {
+                "type": "array",
+                "minItems": 4,
+                "maxItems": 4,
+                "items": { "type": "number", "minimum": 0, "maximum": 1 }
+              }
+            }
+          }
+        }
+      }
+    },
+    "deferredFlag": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "phase"],
+      "properties": {
+        "status": { "type": "string", "const": "deferred" },
+        "phase": { "type": "string", "const": "S-D5" }
+      }
+    }
+  }
+}
