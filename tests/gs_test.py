@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: Apache-2.0
+# Part of the A3 universe. See LICENSE.
 """GS-001..004 — a3ui-graphics-v0.1 gate. Stdlib only."""
 
 from __future__ import annotations
