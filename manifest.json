@@ -1,0 +1,91 @@
+{
+  "tag": "a3ui-graphics-v0.1",
+  "generato_il": "2026-09-15",
+  "nota": "Indice macchina-leggibile della spec. Esiste perche' un consumatore non debba dedurre dal filesystem quali file puo' leggere: la fase la dichiara la spec, non chi la consuma.",
+  "fasi_consumabili": [
+    "fase-1"
+  ],
+  "fasi_differite": [
+    "remainder-l2",
+    "S-D2",
+    "S-D3",
+    "S-D4",
+    "S-D5"
+  ],
+  "file": [
+    {
+      "token": "tokens/audio.json",
+      "schema": "schemas/audio.schema.json",
+      "doc": "docs/06-audio.md",
+      "version": "0.1",
+      "status": "deferred",
+      "phase": "S-D5",
+      "consumabile": false
+    },
+    {
+      "token": "tokens/colors.json",
+      "schema": "schemas/colors.schema.json",
+      "doc": "docs/00-foundations.md",
+      "version": "0.1",
+      "status": "fase-1",
+      "phase": "fase-1",
+      "consumabile": true
+    },
+    {
+      "token": "tokens/elevation.json",
+      "schema": "schemas/elevation.schema.json",
+      "doc": "docs/00-foundations.md",
+      "version": "0.1",
+      "status": "fase-1",
+      "phase": "fase-1",
+      "consumabile": true
+    },
+    {
+      "token": "tokens/haptic.json",
+      "schema": "schemas/haptic.schema.json",
+      "doc": "docs/07-haptic.md",
+      "version": "0.1",
+      "status": "deferred",
+      "phase": "S-D5",
+      "consumabile": false
+    },
+    {
+      "token": "tokens/motion.json",
+      "schema": "schemas/motion.schema.json",
+      "doc": "docs/02-motion.md",
+      "version": "0.1",
+      "status": "deferred",
+      "phase": "S-D2",
+      "consumabile": false
+    },
+    {
+      "token": "tokens/surfaces.json",
+      "schema": "schemas/surfaces.schema.json",
+      "doc": "docs/00-foundations.md",
+      "version": "0.1",
+      "status": "fase-1",
+      "phase": "fase-1",
+      "consumabile": true
+    },
+    {
+      "token": "tokens/typography.json",
+      "schema": "schemas/typography.schema.json",
+      "doc": "docs/01-micro-geometry.md",
+      "version": "0.1",
+      "status": "deferred",
+      "phase": "remainder-l2",
+      "consumabile": false
+    }
+  ],
+  "consumatori_noti": [
+    {
+      "nome": "consumer-privato",
+      "come": "consumer bridge dichiarato dal progetto adottante",
+      "consuma": [
+        "colors",
+        "elevation",
+        "surfaces"
+      ]
+    }
+  ]
+}

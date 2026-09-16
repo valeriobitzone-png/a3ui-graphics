@@ -1,0 +1,27 @@
+Creative Commons Attribution 4.0 International (CC BY 4.0)
+
+Copyright (c) 2026 A3 contributors
+
+Questo repository è una SPEC: documenti, token JSON, schemi e test di
+conformance. Non è codice applicativo.
+
+Sei libero di:
+  · condividere — copiare e ridistribuire il materiale con ogni mezzo e formato
+  · adattare — remixare, trasformare e costruirci sopra, per qualsiasi scopo,
+    anche commerciale
+
+Alla sola condizione di:
+  · ATTRIBUZIONE — dare credito adeguato, indicare il tag o la versione della
+    spec da cui derivi (per esempio `a3ui-graphics-v0.1`) e segnalare se hai
+    apportato modifiche. Puoi farlo in qualsiasi modo ragionevole, ma non in
+    un modo che suggerisca che l'autore avalli te o il tuo uso.
+
+Nessuna restrizione ulteriore: non puoi applicare termini legali o misure
+tecnologiche che impediscano ad altri di fare ciò che la licenza consente.
+
+Testo integrale e vincolante:
+  https://creativecommons.org/licenses/by/4.0/legalcode.it
+Sintesi leggibile:
+  https://creativecommons.org/licenses/by/4.0/deed.it
+
+Identificatore SPDX: CC-BY-4.0

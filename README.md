@@ -1,55 +1,47 @@
-# a3ui-graphics
+# a3ui-graphics — renderer-neutral visual tokens
 
-Corpo visivo / sensoriale di A3UI. **Non è A3.** Spec OS-level: vetro, geometria, motion, chrome, shader, audio, haptic. Tag **`a3ui-graphics-v0.1`**: spec. L'implementazione nel renderer sta nel repo A3 e consumerà `tokens/*.json` — non in questo tag.
+![a3ui-graphics cover](docs/assets/cover.png)
 
-A3 (`valeriobitzone-png/a3`) resta freeze. Nessun `*Spec`, nessun thaw di `a3ui/`. Catalogo invariato: `stack row list item action field text`.
+## What it is
 
-Repo **private** (`git@github.com:valeriobitzone-png/a3ui-graphics.git`). Nessun push finché non deciso.
+A renderer-neutral specification of visual tokens, schemas, rationale, limits, and implementation phases for A3UI consumers. `manifest.json` is the machine-readable index; only entries marked `consumabile: true` in phase 1 may be consumed.
 
-## Invarianti
+## What it is not
 
-| ID | Regola |
-|---|---|
-| GR-001 | Spec = fonte di verità. Implementazione consuma token. |
-| GR-002 | Ogni livello: rationale + limiti + fase. |
-| GR-003 | Token JSON versionati. Niente vetro/ombra/spring hardcoded quando A3 consumerà. |
-| GR-004 | Roadmap pubblica; fasi non saltate. |
+It is not application code, not a second A3UI renderer, not a source of epistemic facts, and not permission to consume deferred phases. It does not make claims about physical display performance.
 
-## Albero
+## Status
 
-```
-docs/
-  00-foundations.md        livello 1 — Fase 1
-  01-micro-geometry.md     livello 2 — Fase 1 (curvature); type/icone = remainder-l2
-  02-motion.md             livello 3 — S-D2
-  03-micro-interactions.md livello 4 — S-D3
-  04-system-chrome.md      livello 5 — S-D4
-  05-shaders-vfx.md       livello 6 — S-D5
-  06-audio.md              suoni — S-D5
-  07-haptic.md             haptic — S-D5
-  roadmap.md               fasi 1–5
-tokens/                   colors elevation surfaces motion audio haptic typography
-schemas/                  JSON Schema per GS-002
-tests/gs_test.py
+- **VERIFIED:** GS-001..GS-004 and CS-001..CS-006, token/schema consistency, manifest alignment, and phase-1 boundaries.
+- **UNVERIFIED:** downstream visual fidelity and hardware-specific rendering.
+
+## Get it
+
+```bash
+git clone https://github.com/valeriobitzone-png/a3ui-graphics.git
+cd a3ui-graphics
+# Requirements: Python 3
 ```
 
-## Fase 1 (unica implementabile dopo questo tag, in A3)
+Structure: `manifest.json`, `tokens/`, `schemas/`, `docs/`, and `tests/`. Phase-1 entries currently cover colors, elevation, and surfaces; motion, typography, audio, and haptic remain deferred.
 
-Liquid glass base + curvature:
+## Prove it
 
-- Gaussian blur, vibrancy, inner/outer highlight 1px, ambient + key shadow
-- Squircles, nested radius
-
-**Vietato in v0.1 e in Fase 1 A3:** refraction, noise, shaders custom, particle, distorsione liquida, Monet, contrasto real-time, luminanza adattiva, variable fonts, icone animate, spring/morph/inertia, ripple/rubber/parallax, island/modal chrome, audio/haptic nuovi.
-
-## Test
-
-```
+```bash
 python3 tests/gs_test.py
+python3 tests/consumer_test.py
 ```
 
-GS-001 struttura · GS-002 schema JSON · GS-003 rationale/limiti/fase · GS-004 roadmap ↔ docs.
+Expected result: both gates pass and no deferred token is treated as consumable.
 
-## Non fa
+## Integrate it
 
-Secondo renderer, KMP, LICENSE pubblica, disclosure. Niente glyph inventati dall'AI.
+Read `manifest.json`, consume only phase-1 entries, preserve the declared tag/version/path provenance, and validate your integration with `tools/valida_token.py` when available in your consumer repository. Never glob tokens or silently consume deferred phases.
+
+## License
+
+Specification, token, schema, and documentation assets are CC BY 4.0 (`LICENSE`).
+
+## Provenance
+
+Measured: schema checks, manifest/disc alignment, phase checks, and consumer tests. Visual quality on a particular device is downstream evidence and remains unverified until measured there.
