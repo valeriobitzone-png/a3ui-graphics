@@ -13,7 +13,7 @@ Il Gaussian blur di Fase 1 è un filtro di compositing, non uno shader di vetro.
 ## Differito — contenuto di S-D5 (grafica)
 
 - Shader di refraction (custom), parametri versionati in un bump di `surfaces.json`.
-- Noise texture (micro-grana), asset disegnato o procedurale dichiarato — non inventato in chat.
+- Noise texture (micro-grana), asset disegnato o procedurale dichiarato — non inventato senza provenienza.
 - Particle effects e masking.
 - Distorsione liquida del contenitore (oltre lo squircle statico).
 
